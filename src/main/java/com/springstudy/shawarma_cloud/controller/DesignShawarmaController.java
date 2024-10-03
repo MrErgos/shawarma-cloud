@@ -3,9 +3,11 @@ package com.springstudy.shawarma_cloud.controller;
 import com.springstudy.shawarma_cloud.model.Ingredient;
 import com.springstudy.shawarma_cloud.model.Shawarma;
 import com.springstudy.shawarma_cloud.model.ShawarmaOrder;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -43,7 +45,11 @@ public class DesignShawarmaController {
     }
 
     @PostMapping
-    public String processShawarma(Shawarma shawarma, @ModelAttribute ShawarmaOrder shawarmaOrder) {
+    public String processShawarma(@Valid Shawarma shawarma, Errors errors,
+                                  @ModelAttribute ShawarmaOrder shawarmaOrder) {
+        if (errors.hasErrors()) {
+            return "design";
+        }
         shawarmaOrder.addShawarma(shawarma);
         log.info("Приготовление шаурмы: {}", shawarma);
 

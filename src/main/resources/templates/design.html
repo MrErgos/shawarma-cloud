@@ -12,6 +12,9 @@
 
     <form method="POST" th:object="${shawarma}">
         <div class="grid">
+            <span class="validationError"
+                th:if="${#fields.hasErrors('ingredients')}"
+                th:errors="*{ingredients}">Ingredients Error</span> <br />
             <div class="ingredient-group" id="wraps">
                 <h3>Выбери свой лаваш:</h3>
                 <div th:each="ingredient : ${wrap}">
@@ -50,7 +53,11 @@
 
             <div>
                 <h3>Как ты назовешь эту шаурму:</h3>
-                <input type="text" th:field="*{name}" /> <br />
+                <input type="text" th:field="*{name}" />
+                <span class="validationError"
+                    th:if="${#fields.hasErrors('name')}"
+                    th:errors="*{name}">Shawarma name Error</span>
+                <br />
                 <button>Подтвердить создание шаурмы!</button>
             </div>
         </div>
