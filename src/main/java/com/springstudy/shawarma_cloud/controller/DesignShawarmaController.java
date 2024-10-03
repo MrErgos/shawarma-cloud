@@ -6,10 +6,7 @@ import com.springstudy.shawarma_cloud.model.ShawarmaOrder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -43,6 +40,14 @@ public class DesignShawarmaController {
             model.addAttribute(type.toString().toLowerCase(),
             filterByType(ingredients, type));
         }
+    }
+
+    @PostMapping
+    public String processShawarma(Shawarma shawarma, @ModelAttribute ShawarmaOrder shawarmaOrder) {
+        shawarmaOrder.addShawarma(shawarma);
+        log.info("Приготовление шаурмы: {}", shawarma);
+
+        return "redirect:/orders/current";
     }
 
     @ModelAttribute(name = "shawarmaOrder")

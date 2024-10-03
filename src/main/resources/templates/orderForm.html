@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shawarma Cloud</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+    <form th:action="@{/orders}" method="POST" th:object="${shawarmaOrder}">
+      <h1>Закажи свои фирменные шаурмы!</h1>
+
+      <img th:src="@{/images/ShawarmaCloud.png}" alt="ShawarmaCloud logo">
+
+      <h3>Твои шаурмы в этом заказе:</h3>
+      <a th:href="@{/design}" id="another">Создать новую шаурму</a><br />
+      <ul>
+        <li th:each="shawarma : ${shawarmaOrder.shawarmas}">
+          <span th:text="${shawarma.name}">Название шаурмы</span>
+        </li>
+      </ul>
+
+      <h3>Доставить мои шаурмы по адресу:</h3>
+      <label for="deliveryName">Имя:</label>
+      <input type="text" th:field="*{deliveryName}" />
+      <br />
+      <label for="deliveryStreet">Улица:</label>
+      <input type="text" th:field="*{deliveryStreet}" />
+      <br />
+      <label for="deliveryState">Область:</label>
+      <input type="text" th:field="*{deliveryState}" />
+      <br />
+      <label for="deliveryCity">Город:</label>
+      <input type="text" th:field="*{deliveryCity}" />
+      <br />
+      <label for="deliveryZip">Почтовый индекс:</label>
+      <input type="text" th:field="*{deliveryZip}" />
+      <br />
+      <h3>Данные оплаты:</h3>
+      <label for="ccNumber">Номер кредитной карты:</label>
+      <input type="text" th:field="*{ccNumber}" />
+      <br />
+      <label for="ccExpiration">Дата окончания:</label>
+      <input type="text" th:field="*{ccExpiration}" />
+      <br />
+      <label for="ccCVV">CVV:</label>
+      <input type="text" th:field="*{ccCVV}" />
+      <br />
+
+      <input type="submit" value="Подтвердить заказ" />
+    </form>
+</body>
+</html>
