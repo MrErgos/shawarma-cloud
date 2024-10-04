@@ -1,6 +1,7 @@
 package com.springstudy.shawarma_cloud.controller;
 
 import com.springstudy.shawarma_cloud.model.ShawarmaOrder;
+import com.springstudy.shawarma_cloud.repository.OrderRepository;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,12 @@ import org.springframework.web.bind.support.SessionStatus;
 @SessionAttributes("shawarmaOrder")
 public class OrderController {
 
+    private OrderRepository orderRepository;
+
+    public OrderController(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
+
     @GetMapping("/current")
     public String currentOrderFrom() {
         return "orderForm";
@@ -28,7 +35,7 @@ public class OrderController {
         if (errors.hasErrors()) {
             return "orderForm";
         }
-        log.info("Заказ принят: {}", order);
+        orderRepository.save(order);
         sessionStatus.setComplete();
         return "redirect:/";
     }
