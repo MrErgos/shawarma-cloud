@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: shawarma-cloud
+  datasource:
+    generate-unique-name: false
+    name: shawarmacloud
+
