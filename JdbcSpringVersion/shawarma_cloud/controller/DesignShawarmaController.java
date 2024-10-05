@@ -46,6 +46,7 @@ public class DesignShawarmaController {
             return "design";
         }
         shawarmaOrder.addShawarma(shawarma);
+        log.info("Приготовление шаурмы: {}", shawarma);
 
         return "redirect:/orders/current";
     }
