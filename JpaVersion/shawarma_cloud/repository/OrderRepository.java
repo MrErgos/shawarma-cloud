@@ -4,8 +4,7 @@ import com.springstudy.shawarma_cloud.model.ShawarmaOrder;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
-import java.util.UUID;
 
-public interface OrderRepository extends CrudRepository<ShawarmaOrder, UUID> {
+public interface OrderRepository extends CrudRepository<ShawarmaOrder, Long> {
     List<ShawarmaOrder> findByDeliveryZip(String deliveryZip);
 }

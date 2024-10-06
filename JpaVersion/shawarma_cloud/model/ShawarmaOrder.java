@@ -1,29 +1,24 @@
 package com.springstudy.shawarma_cloud.model;
 
-import com.datastax.oss.driver.api.core.uuid.Uuids;
-import com.springstudy.shawarma_cloud.udt.ShawarmaUDT;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
-import org.springframework.data.cassandra.core.mapping.Column;
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Data
-@Table("orders")
+@Entity
 public class ShawarmaOrder implements Serializable {
     private static final long serialVersionUID = 1L;
-    @PrimaryKey
-    private UUID id = Uuids.timeBased();
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private Date placedAt = new Date();
 
     @NotBlank(message = "Имя обязательно")
@@ -45,10 +40,10 @@ public class ShawarmaOrder implements Serializable {
     @Digits(integer = 3, fraction = 0, message = "Неверный CVV")
     private String ccCVV;
 
-    @Column("shawarmas")
-    private List<ShawarmaUDT> shawarmas = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Shawarma> shawarmas = new ArrayList<>();
 
-    public void addShawarma(ShawarmaUDT shawarma) {
+    public void addShawarma(Shawarma shawarma) {
         this.shawarmas.add(shawarma);
     }
 }

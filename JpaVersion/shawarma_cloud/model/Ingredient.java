@@ -1,18 +1,18 @@
 package com.springstudy.shawarma_cloud.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.Table;
 
 @Data
-@Table("ingredients")
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public class Ingredient {
-    @PrimaryKey
+    @Id
     private String id;
 
     private String name;
