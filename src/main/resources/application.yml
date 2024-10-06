@@ -1,9 +1,14 @@
 spring:
-  cassandra:
-    local-datacenter: datacenter1
-    contact-points: localhost
-    port: 9042
-    keyspace-name: shawarmacloud
-    schema-action: recreate
   application:
     name: shawarma-cloud
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+logging:
+  level:
+    org:
+      springframework:
+        jdbc:
+          core:
+            JdbcTemplate: debug

@@ -4,6 +4,7 @@ import com.springstudy.shawarma_cloud.model.Ingredient;
 import com.springstudy.shawarma_cloud.model.Shawarma;
 import com.springstudy.shawarma_cloud.model.ShawarmaOrder;
 import com.springstudy.shawarma_cloud.repository.IngredientRepository;
+import com.springstudy.shawarma_cloud.service.ShawarmaUDRUtils;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class DesignShawarmaController {
         if (errors.hasErrors()) {
             return "design";
         }
-        shawarmaOrder.addShawarma(shawarma);
+        shawarmaOrder.addShawarma(ShawarmaUDRUtils.toShawarmaUDT(shawarma));
 
         return "redirect:/orders/current";
     }
