@@ -1,4 +1,4 @@
-package com.springstudy.shawarma_cloud.udt;
+package com.springstudy.shawarma_cloud.dto;
 
 import lombok.Data;
 
