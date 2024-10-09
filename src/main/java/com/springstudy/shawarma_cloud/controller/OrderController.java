@@ -1,9 +1,11 @@
 package com.springstudy.shawarma_cloud.controller;
 
 import com.springstudy.shawarma_cloud.model.ShawarmaOrder;
+import com.springstudy.shawarma_cloud.model.User;
 import com.springstudy.shawarma_cloud.repository.OrderRepository;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,10 +33,14 @@ public class OrderController {
 
     @PostMapping
     public String processOrder(@Valid ShawarmaOrder order, Errors errors,
-                               SessionStatus sessionStatus) {
+                               SessionStatus sessionStatus,
+                               @AuthenticationPrincipal User user) {
+
         if (errors.hasErrors()) {
             return "orderForm";
         }
+
+        order.setUser(user);
         orderRepository.save(order);
         sessionStatus.setComplete();
         return "redirect:/";
