@@ -11,3 +11,4 @@ logging:
         jdbc:
           core:
             JdbcTemplate: debug
+        security: DEBUG
