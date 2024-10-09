@@ -7,6 +7,9 @@
     <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
+  <form method="post" th:action="@{/logout}">
+    <input type="submit" value="Выйти">
+  </form>
     <form th:action="@{/orders}" method="POST" th:object="${shawarmaOrder}">
       <h1>Закажи свои фирменные шаурмы!</h1>
 
@@ -19,7 +22,7 @@
           <span th:text="${shawarma.name}">Название шаурмы</span>
         </li>
       </ul>
-
+      <input type="hidden" name="_csrf" value="${_csrf.token}">
       <h3>Доставить мои шаурмы по адресу:</h3>
       <label for="deliveryName">Имя:</label>
       <input type="text" th:field="*{deliveryName}" />

@@ -10,7 +10,12 @@
     <h1>Придумай свою шаурму</h1>
     <img th:src="@{/images/ShawarmaCloud.png}" alt="ShawarmaCloud logo">
 
+    <form method="post" th:action="@{/logout}">
+        <input type="submit" value="Выйти" />
+    </form>
+
     <form method="POST" th:object="${shawarma}">
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
         <div class="grid">
             <span class="validationError"
                 th:if="${#fields.hasErrors('ingredients')}"
