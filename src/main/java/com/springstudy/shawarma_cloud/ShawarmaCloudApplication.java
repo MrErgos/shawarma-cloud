@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 
 @SpringBootApplication
 public class ShawarmaCloudApplication {
@@ -15,6 +16,7 @@ public class ShawarmaCloudApplication {
 	}
 
 	@Bean
+	@Profile("!prod")
 	public CommandLineRunner dataLoader(IngredientRepository repository) {
 		return args -> {
 			repository.deleteAll();

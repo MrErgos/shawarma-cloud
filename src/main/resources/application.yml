@@ -12,3 +12,6 @@ logging:
           core:
             JdbcTemplate: debug
         security: DEBUG
+shawarma:
+  order:
+    pageSize: 10
