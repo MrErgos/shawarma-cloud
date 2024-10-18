@@ -1,11 +1,13 @@
 package com.springstudy.shawarma_cloud.controller;
 
+import com.springstudy.shawarma_cloud.jsm.JmsOrderMessagingService;
 import com.springstudy.shawarma_cloud.model.ShawarmaOrder;
 import com.springstudy.shawarma_cloud.model.User;
 import com.springstudy.shawarma_cloud.repository.OrderRepository;
 import jakarta.validation.Valid;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,9 +29,12 @@ import org.springframework.web.bind.support.SessionStatus;
 public class OrderController {
 
     private OrderRepository orderRepository;
+    private JmsOrderMessagingService jmsOrderMessagingService;
 
-    public OrderController(OrderRepository orderRepository) {
+    @Autowired
+    public OrderController(OrderRepository orderRepository, JmsOrderMessagingService jmsOrderMessagingService) {
         this.orderRepository = orderRepository;
+        this.jmsOrderMessagingService = jmsOrderMessagingService;
     }
 
     @Setter
@@ -60,6 +65,7 @@ public class OrderController {
 
         order.setUser(user);
         orderRepository.save(order);
+        jmsOrderMessagingService.sendOrder(order);
         sessionStatus.setComplete();
         return "redirect:/";
     }
