@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: shawarma-cloud
+  datasource:
+    generate-unique-name: false
+    name: shawarmacloud
+logging:
+  level:
+    org:
+      springframework:
+        jdbc:
+          core:
+            JdbcTemplate: debug
+        security: DEBUG
+shawarma:
+  order:
+    pageSize: 10
