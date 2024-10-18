@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+/src/main/resources/Reg
+/unnamed.patch
+/unnamed1.patch
+/unnamed2.patch
