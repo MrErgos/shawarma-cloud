@@ -1,6 +1,6 @@
 package com.springstudy.shawarma_cloud.controller.api;
 
-import com.springstudy.shawarma_cloud.jsm.OrderMessagingService;
+import com.springstudy.shawarma_cloud.messaging_service.OrderMessagingService;
 import com.springstudy.shawarma_cloud.model.ShawarmaOrder;
 import com.springstudy.shawarma_cloud.repository.OrderRepository;
 import org.springframework.dao.EmptyResultDataAccessException;

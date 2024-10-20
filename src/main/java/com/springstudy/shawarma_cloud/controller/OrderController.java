@@ -1,6 +1,6 @@
 package com.springstudy.shawarma_cloud.controller;
 
-import com.springstudy.shawarma_cloud.jsm.JmsOrderMessagingService;
+import com.springstudy.shawarma_cloud.messaging_service.OrderMessagingService;
 import com.springstudy.shawarma_cloud.model.ShawarmaOrder;
 import com.springstudy.shawarma_cloud.model.User;
 import com.springstudy.shawarma_cloud.repository.OrderRepository;
@@ -29,12 +29,12 @@ import org.springframework.web.bind.support.SessionStatus;
 public class OrderController {
 
     private OrderRepository orderRepository;
-    private JmsOrderMessagingService jmsOrderMessagingService;
+    private OrderMessagingService orderMessagingService;
 
     @Autowired
-    public OrderController(OrderRepository orderRepository, JmsOrderMessagingService jmsOrderMessagingService) {
+    public OrderController(OrderRepository orderRepository, OrderMessagingService orderMessagingService) {
         this.orderRepository = orderRepository;
-        this.jmsOrderMessagingService = jmsOrderMessagingService;
+        this.orderMessagingService = orderMessagingService;
     }
 
     @Setter
@@ -65,7 +65,7 @@ public class OrderController {
 
         order.setUser(user);
         orderRepository.save(order);
-        jmsOrderMessagingService.sendOrder(order);
+        orderMessagingService.sendOrder(order);
         sessionStatus.setComplete();
         return "redirect:/";
     }

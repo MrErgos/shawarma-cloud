@@ -55,19 +55,19 @@
             th:errors="*{deliveryZip}">Delivery Zip Error</span>
       <br />
       <h3>Данные оплаты:</h3>
-      <label for="ccNumber">Номер кредитной карты:</label>
+      <label for="ccNumber">Номер кредитной карты (пример 4917484589897107):</label>
       <input type="text" th:field="*{ccNumber}" />
       <span class="validationError"
         th:if="${#fields.hasErrors('ccNumber')}"
         th:errors="*{ccNumber}">CC Num Error</span>
       <br />
-      <label for="ccExpiration">Дата окончания:</label>
+      <label for="ccExpiration">Дата окончания (пример 01/26):</label>
       <input type="text" th:field="*{ccExpiration}" />
       <span class="validationError"
         th:if="${#fields.hasErrors('ccExpiration')}"
         th:errors="*{ccExpiration}">CC Expiration Error</span>
       <br />
-      <label for="ccCVV">CVV:</label>
+      <label for="ccCVV">CVV (пример 123):</label>
       <input type="text" th:field="*{ccCVV}" />
       <span class="validationError"
         th:if="${#fields.hasErrors('ccCVV')}"

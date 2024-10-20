@@ -1,4 +1,4 @@
-package com.springstudy.shawarma_cloud.jsm;
+package com.springstudy.shawarma_cloud.messaging_service;
 
 import com.springstudy.shawarma_cloud.model.ShawarmaOrder;
 

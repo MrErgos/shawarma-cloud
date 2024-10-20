@@ -1,4 +1,14 @@
 spring:
+  profiles:
+    active: kafka-template
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+    producer:
+      keySerializer: org.springframework.kafka.support.serializer.JsonSerializer
+      valueSerializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.type.mapping: ShawarmaOrder:com.springstudy.shawarma_cloud.model.ShawarmaOrder
   application:
     name: shawarma-cloud
   datasource:

@@ -37,25 +37,26 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/design", "/orders").hasRole("USER")
-                        .requestMatchers(HttpMethod.POST, "/api/ingredients").hasAuthority("SCOPE_writeIngredients")
-                        .requestMatchers(HttpMethod.DELETE, "/api/ingredients").hasAuthority("SCOPE_deleteIngredients")
-                        .requestMatchers(HttpMethod.GET, "api/orders").hasAuthority("SCOPE_readOrders")
-                        .requestMatchers(HttpMethod.POST, "api/orders").hasAuthority("SCOPE_writeOrders")
-                        .requestMatchers(HttpMethod.PATCH, "api/orders/**").hasAuthority("SCOPE_patchOrders")
-                        .requestMatchers(HttpMethod.DELETE, "api/orders/**").hasAuthority("SCOPE_deleteOrders")
-                        .requestMatchers(HttpMethod.GET, "api/shawarmas").hasAuthority("SCOPE_readShawarmas")
-                        .requestMatchers(HttpMethod.POST, "api/shawarmas").hasAuthority("SCOPE_writeShawarmas")
-                        .requestMatchers(HttpMethod.GET, "api/shawarmas/**").hasAuthority("SCOPE_readЗarticularShawarma")
+                        .requestMatchers("/api/tacos", "/api/orders/**").permitAll()
+//                        .requestMatchers("/design", "/orders").hasRole("USER")
+//                        .requestMatchers(HttpMethod.POST, "/api/ingredients").hasAuthority("SCOPE_writeIngredients")
+//                        .requestMatchers(HttpMethod.DELETE, "/api/ingredients").hasAuthority("SCOPE_deleteIngredients")
+//                        .requestMatchers(HttpMethod.GET, "api/orders").hasAuthority("SCOPE_readOrders")
+//                        .requestMatchers(HttpMethod.POST, "api/orders").permitAll()
+//                        .requestMatchers(HttpMethod.PATCH, "api/orders/**").hasAuthority("SCOPE_patchOrders")
+//                        .requestMatchers(HttpMethod.DELETE, "api/orders/**").hasAuthority("SCOPE_deleteOrders")
+//                        .requestMatchers(HttpMethod.GET, "api/shawarmas").hasAuthority("SCOPE_readShawarmas")
+//                        .requestMatchers(HttpMethod.POST, "api/shawarmas").hasAuthority("SCOPE_writeShawarmas")
+//                        .requestMatchers(HttpMethod.GET, "api/shawarmas/**").hasAuthority("SCOPE_readЗarticularShawarma")
                         .anyRequest().permitAll()
                 )
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
+                //.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .formLogin(loginForm -> loginForm
                         .loginPage("/login"))
                 .logout(logout -> logout
                         .logoutSuccessUrl("/"))
                 .csrf(csrfConfigurer -> csrfConfigurer
-                        .ignoringRequestMatchers("/h2-console/**"))
+                        .ignoringRequestMatchers("/h2-console/**", "/api/**"))
                 .headers(headersConfigurer -> headersConfigurer
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .build();
