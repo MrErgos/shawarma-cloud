@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Shawarma Cloud Kitchen</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" th:href="@{/styles.css}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    </head>
+    <body>
+        <h2>Заказ от <span th:text="${order.deliveryName}"></span></h2>
+        <h3>Доставить по</h3>
+        <div>
+            <span th:text="${order.deliveryStreet}"></span><br>
+            <span th:text="${order.deliveryCity}"></span><br>
+            <span th:text="${order.deliveryState}"></span><br>
+            <span th:text="${order.deliveryZip}"></span><br>
+        </div>
+        <h3>Шаурмы:</h3>
+        <div th:each="shawarma : ${order.shawarmas}">
+            <b th:text="${shawarma.name}">НАЗВАНИЕ ШАУРМЫ</b><br>
+            <ul>
+                <li th:each="ingredient : ${shawarma.ingredients}">
+                    <span th:text="${ingredient.name}">ИНГРЕДИЕНТ</span>
+                </li>
+            </ul>
+        </div>
+        <div class="refreshButton" onclick="location.reload()">
+            Refresh
+        </div>
+    </body>
+</html>
