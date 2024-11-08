@@ -1,0 +1,7 @@
+package com.springstudy.data;
+
+import com.springstudy.model.Ingredient;
+import org.springframework.data.repository.CrudRepository;
+
+public interface IngredientRepository extends CrudRepository<Ingredient, String> {
+}
